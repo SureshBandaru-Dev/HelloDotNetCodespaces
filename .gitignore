@@ -1,52 +1,83 @@
-# Prerequisites
-*.d
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@sureshbandaruathadoop 
+intersystems
+/
+Samples-dotnet-helloworld
+Public
+Fork your own copy of intersystems/Samples-dotnet-helloworld
+Code
+Issues
+Pull requests
+1
+Actions
+Projects
+Security
+Insights
+Samples-dotnet-helloworld/samples-dotnet-helloworld/HelloWorld.cs /
+@isc-ddo
+isc-ddo Add sample Helloworld code
+Latest commit 649268d on Mar 1, 2019
+ History
+ 1 contributor
+37 lines (33 sloc)  1.12 KB
 
-# Linker output
-*.ilk
-*.map
-*.exp
+/*
+* PURPOSE: Makes a connection to an instance of InterSystems IRIS Data Platform.
+*/
 
-# Precompiled Headers
-*.gch
-*.pch
+using System;
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+using InterSystems.Data.IRISClient;
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            String ip = "localhost";
+            int port = 51773;
+            String Namespace = "USER";
+            String username = "SuperUser";
+            String password = "SYS";
+            try
+            {
+                // Using IRISADOConnection to connect
+                IRISADOConnection connect = new IRISADOConnection();
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+                // Create connection string
+                connect.ConnectionString = "Server = " + ip + "; Port = " + port + "; Namespace =  " + Namespace + "; Password = " + password + "; User ID = " + username;
+                connect.Open();
+                Console.WriteLine("Hello World! You have successfully connected to InterSystems IRIS. Press any key to continue.");
+                Console.ReadKey();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Connection failed:\n" + e);
+            }
+        }
+    }
+}
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Samples-dotnet-helloworld/HelloWorld.cs at master · intersystems/Samples-dotnet-helloworld
